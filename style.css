@@ -21,24 +21,31 @@ body {
     height: 600px;
     border: 3px solid #D3E4CD;
     border-radius: 18px;
-    box-shadow: 0 0 0 #99A799, 5px 0 5px #99A799, 5px 5px 5px #99A799, -5px 0 5px #99A799;
+    box-shadow: 0 0 0 #99A799, 5px 0 5px #99A799, 10px 5px 5px #99A799, -5px 0 5px #99A799;
     
 }
 /*-----------------------------screen---------------------------*/
 
 .screen{
-    width: 300px;
-    height: 20%;
     margin-top: 40px;
+    padding: 10px 0;
+    width: 280px;
+    height: 18%;
+    border-style: solid;
+    border-width: 30px 20px 30px 20px;
+    border-color: #434242;
+    border-radius: 15px;
+    background-color: #CAE4DB;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: flex-end;
     gap: 30px;
-    border: 3px solid grey;
-    background-color: #CAE4DB;
-    border-radius: 15px;
+    
+    
 }
+
+
 
 .expression, .enter{
     margin-right: 20px;
