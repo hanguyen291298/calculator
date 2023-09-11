@@ -30,9 +30,22 @@ body {
     width: 300px;
     height: 20%;
     margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 30px;
     border: 3px solid grey;
     background-color: #CAE4DB;
     border-radius: 15px;
+}
+
+.expression, .enter{
+    margin-right: 20px;
+    font-size: 26px;
+    display: flex;
+    gap: 10px;
+    
 }
 
 /*-----------------------------------Buttons--------------------------*/
@@ -52,6 +65,7 @@ button, .add{
     font-size: 24px;
     background-color: #434242;
     color: white;
+    cursor: pointer;
 }
 
 .row_four_buttons, .line4, .line5, .two_final_rows{
