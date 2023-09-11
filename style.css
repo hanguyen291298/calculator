@@ -1,0 +1,70 @@
+body {
+    background-color: #181D31;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+
+}
+/*----------------------------calculator shape---------------------------*/
+
+.calculator-shape{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    margin-top: 30px;
+    background-color:#F6F4EB;
+    width: 400px;
+    height: 600px;
+    border: 3px solid #D3E4CD;
+    border-radius: 18px;
+    box-shadow: 0 0 0 #99A799, 5px 0 5px #99A799, 5px 5px 5px #99A799, -5px 0 5px #99A799;
+    
+}
+/*-----------------------------screen---------------------------*/
+
+.screen{
+    width: 300px;
+    height: 20%;
+    margin-top: 40px;
+    border: 3px solid grey;
+    background-color: #CAE4DB;
+    border-radius: 15px;
+}
+
+/*-----------------------------------Buttons--------------------------*/
+
+.buttons, .share_add_button{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+button, .add{
+    width: 60px;
+    height: 50px;
+    border-radius: 10px;
+    border: 2px solid grey ;
+    box-shadow: 4px -2px 5px #99A799;
+    font-size: 24px;
+    background-color: #434242;
+    color: white;
+}
+
+.row_four_buttons, .line4, .line5, .two_final_rows{
+    display: flex;
+    gap: 22px;
+}
+
+.add{
+    width: 60px;
+    height: 125px;
+}
+
+.footer{
+    font-size: 18px;
+    color: white;
+}
