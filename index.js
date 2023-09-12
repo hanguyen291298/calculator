@@ -79,8 +79,18 @@ for (const bnt of buttons){
             }
         }   
         else if (bnt.classList.contains("CE")){
-            current_number = "";
+            if (equal_mark.textContent){
+                first_value.innerHTML = "";
+                second_value.innerHTML = "";
+                operator.innerHTML = "";
+                equal_mark.innerHTML = "";
+                enter_data.innerHTML = "0"
+                current_number = "";
+            }
+            else{
+                current_number = "";
             enter_data.innerHTML = "0";
+            }
         }
         else {
 
@@ -107,7 +117,6 @@ for (const bnt of buttons){
 }
 
 
-// create a funtion to call equal funtion to return a result
 
 
 
