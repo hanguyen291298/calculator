@@ -1,5 +1,5 @@
 function add(a, b){
-    return a + b;
+    return parseFloat(a) + parseFloat(b);
 };
 
 function subtract(a, b){
@@ -34,6 +34,7 @@ let enter_data = document.querySelector(".enter");
 let first_value = document.querySelector(".first_value");
 let second_value = document.querySelector(".second_value")
 let operator = document.querySelector(".operator");
+let equal_mark = document.querySelector(".equal_mark")
 let result;
 let current_number = "";
 
@@ -52,6 +53,7 @@ for (const bnt of buttons){
 
             result = Operators[operator.textContent](first_value.textContent, enter_data.textContent)
             second_value.innerHTML = enter_data.textContent
+            equal_mark.innerHTML = "=";
             enter_data.innerHTML = result
             
         }
@@ -62,9 +64,10 @@ for (const bnt of buttons){
             second_value.innerHTML = "";
             operator.innerHTML = "";
             enter_data.innerHTML = "0";
+            equal_mark.innerHTML = "";
             current_number = "";
         }
-        else if (bnt.classList.contains("CE")){
+        else if (bnt.classList.contains("back")){
 
             if (current_number.length > 1){
                 current_number = current_number.slice(0, current_number.length -1)
@@ -72,15 +75,31 @@ for (const bnt of buttons){
             }
             else {
                 enter_data.innerHTML = "0"
+                current_number = "";
             }
         }   
-        
+        else if (bnt.classList.contains("CE")){
+            current_number = "";
+            enter_data.innerHTML = "0";
+        }
         else {
 
-            first_value.innerHTML = enter_data.textContent;         
-            operator.innerHTML = get_value
-            second_value.innerHTML = "";
-            current_number = "";
+            if (operator.textContent && second_value.textContent === ""){
+                result = Operators[operator.textContent](first_value.textContent, enter_data.textContent);
+                first_value.innerHTML = result;
+                operator.innerHTML = get_value
+                equal_mark.innerHTML = "";
+                enter_data.innerHTML = result;
+                current_number = "";
+            }
+            else {
+                first_value.innerHTML = enter_data.textContent;         
+                operator.innerHTML = get_value
+                second_value.innerHTML = "";
+                equal_mark.innerHTML = "";
+                current_number = "";
+
+            }
         }
 
     })
