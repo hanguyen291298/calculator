@@ -60,7 +60,7 @@ body {
 .buttons, .share_add_button{
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 20px;
 }
 
 button, .add{
