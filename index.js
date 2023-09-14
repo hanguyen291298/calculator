@@ -1,3 +1,5 @@
+// Math function for a calculator
+
 function add(a, b){
     return parseFloat(a) + parseFloat(b);
 };
@@ -14,112 +16,126 @@ function devision(a, b){
     return a / b;
 };
 
-function percentage(a){
-    return (a / 100)
-};
 
 const Operators = {
     "+": add,
     "-": subtract,
     "x": multiply,
-    "%": percentage,
     "÷": devision,
 }
-console.log(Operators["+"])
 
+const  numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-const buttons = document.querySelectorAll("button");
+const calculator = {
 
-let enter_data = document.querySelector(".enter");
+    "firstvalue": "",
+    "secondvalue": "",
+    "operator": "",
+    "currententry": "0",
+    "equalmark": "",
+
+}
+
+let bnts = document.querySelectorAll("button")
 let first_value = document.querySelector(".first_value");
-let second_value = document.querySelector(".second_value")
-let operator = document.querySelector(".operator");
+let second_value = document.querySelector(".second_value");
+let operator_mark = document.querySelector(".operator");
+let input_value = document.querySelector(".input_value")
 let equal_mark = document.querySelector(".equal_mark")
+
 let result;
-let current_number = "";
 
-for (const bnt of buttons){
-    
-    bnt.addEventListener("click", ()=>{
-        
-        let get_value = bnt.textContent
 
-        if (bnt.classList.contains("num")){
-            enter_data.innerHTML = current_number + get_value
-            current_number += get_value
-        }
 
-        else if (bnt.classList.contains("equal")) { 
+// Add an event listener to capture buttons are clicked
 
-            result = Operators[operator.textContent](first_value.textContent, enter_data.textContent)
-            second_value.innerHTML = enter_data.textContent
-            equal_mark.innerHTML = "=";
-            enter_data.innerHTML = result
-            
-        }
 
-        else if (bnt.classList.contains("AC")) {
-            
-            first_value.innerHTML = "";
-            second_value.innerHTML = "";
-            operator.innerHTML = "";
-            enter_data.innerHTML = "0";
-            equal_mark.innerHTML = "";
-            current_number = "";
-        }
-        else if (bnt.classList.contains("back")){
+function equal(a, b, operator){
+    result = Operators[operator](a, b)
+    equal_mark.innerHTML = "="
+    return result    
+}
 
-            if (current_number.length > 1){
-                current_number = current_number.slice(0, current_number.length -1)
-                enter_data.innerHTML = current_number
-            }
-            else {
-                enter_data.innerHTML = "0"
-                current_number = "";
-            }
-        }   
-        else if (bnt.classList.contains("CE")){
-            if (equal_mark.textContent){
-                first_value.innerHTML = "";
-                second_value.innerHTML = "";
-                operator.innerHTML = "";
-                equal_mark.innerHTML = "";
-                enter_data.innerHTML = "0"
-                current_number = "";
-            }
-            else{
-                current_number = "";
-            enter_data.innerHTML = "0";
-            }
-        }
-        else {
+function Update(){
+    first_value.innerHTML = calculator.firstvalue;
+    second_value.innerHTML = calculator.secondvalue
+    operator_mark.innerHTML = calculator.operator
+    input_value.innerHTML = calculator.currententry
+    equal_mark.innerHTML = calculator.equalmark
+    current_number = "";
+}
 
-            if (operator.textContent && second_value.textContent === ""){
-                result = Operators[operator.textContent](first_value.textContent, enter_data.textContent);
-                first_value.innerHTML = result;
-                operator.innerHTML = get_value
-                equal_mark.innerHTML = "";
-                enter_data.innerHTML = result;
-                current_number = "";
-            }
-            else {
-                first_value.innerHTML = enter_data.textContent;         
-                operator.innerHTML = get_value
-                second_value.innerHTML = "";
-                equal_mark.innerHTML = "";
-                current_number = "";
-
-            }
-        }
-
-    })
+function DeleteInpput(){
+    if (equal_mark.textContent){
+        Update()
+    }
+    else{
+        input_value.innerHTML = calculator.currententry
+    }
     
 }
 
+function backspace(){
+    let input_length = input_value.textContent
+    if (input_length.length > 1){
+        input_value.innerHTML = input_length.slice(0, input_length.length - 1)
+    }
+    else{
+        input_value.innerHTML = "0"
+    }
+    
+}
+
+const delete_all = document.querySelector(".AC")
+const delete_entry = document.querySelector(".CE")
+const back = document.querySelector(".back")
+
+
+delete_all.addEventListener("click", Update)
+delete_entry.addEventListener("click", DeleteInpput)
 
 
 
+let current_number = ""
+let operator = ""
+function Get_value(value){
+    if (numbers.includes(parseFloat(value))){
+        current_number += value
+        input_value.innerHTML = current_number
+    }
+    else if(value in Operators){
+        operator = value
+        first_value.innerHTML = input_value.textContent
+        operator_mark.innerHTML = operator
+        current_number = "";
+    }
+    else if (value === "="){
+        second_value.innerHTML += input_value.textContent;
+        input_value.innerHTML = equal(first_value.textContent, second_value.textContent, operator_mark.textContent)
+    }
+    else if (value === "Backspace"){
+        backspace()
+    }
+}
 
 
+function handle_click(){
+    document.addEventListener("click", (event)=>{
+        let text = event.target.textContent;
+        Get_value(text) 
+    })
+}
 
+ handle_click()
 
+// Add an event listener to capture keydown events
+
+function handle_keydown(){
+    document.addEventListener('keydown', (event)=>{
+        let text = event.key;
+        Get_value(text)
+    
+    })
+}
+
+handle_keydown()
