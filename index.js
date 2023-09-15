@@ -137,7 +137,7 @@ function Calculotor_handle(value){
         }
     }
 
-    else if (value == "=" || value == "Enter"){
+    else if (value === "=" || value === "Enter"){
         
         if (input_value.textContent === "0" && operator_mark.textContent === "÷"){
             second_value.innerHTML = CACULATOR.b_value
@@ -178,7 +178,7 @@ function handle_click(){
         }
         else{
             let text = event.target.textContent;
-            console.log(text)
+            
             Calculotor_handle(text) 
         }
         
@@ -192,14 +192,19 @@ function handle_click(){
 function handle_keydown(){
     document.addEventListener('keydown', (event)=>{
         let text = event.key;
+        
+
         if (text == "/"){
             text = "÷";
         }
 
         else if ( text == "*"){
             text = "x";
-        };
-
+        }
+        else if ( text === "Enter"){
+            event.preventDefault();
+        }
+        
         Calculotor_handle(text)
     
     });
