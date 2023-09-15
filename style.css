@@ -47,7 +47,7 @@ body {
 
 
 
-.expression, .enter{
+.expression, .input_value{
     margin-right: 20px;
     font-size: 26px;
     display: flex;
@@ -89,3 +89,4 @@ button, .add{
     font-size: 18px;
     color: white;
 }
+
