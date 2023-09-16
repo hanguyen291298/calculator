@@ -152,10 +152,17 @@ function Calculotor_handle(value){
             second_value.innerHTML = CACULATOR.b_value
             input_value.innerHTML = "Can't not divide by zero"
         }
-        else {
+
+        if (!equal_mark.textContent){
+            
             second_value.innerHTML += input_value.textContent;
             equal_mark.innerHTML = "="
             input_value.innerHTML = equal(first_value.textContent, second_value.textContent, operator_mark.textContent)
+        }
+        else{
+           
+            first_value.innerHTML = input_value.textContent;
+            input_value.innerHTML = equal(first_value.textContent, second_value.textContent, operator_mark.textContent);
             
         }
         
