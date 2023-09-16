@@ -86,9 +86,7 @@ delete_entry.addEventListener("click", DeleteInpput);
 
 function equal(a, b, operator){
     let result = OPERATORS[operator](a, b)
-    console.log(a)
-    console.log(b)
-    console.log(operator)
+    
     return result  
 
 };
@@ -117,9 +115,6 @@ function Calculotor_handle(value){
     if (NUMBERS.includes(parseFloat(value)) && temp_number.length <= 13){
         temp_number += value
         input_value.innerHTML = temp_number
-
-        console.log(temp_number)
-        console.log(input_value.textContent)
     }
 
     else if(value in OPERATORS){
