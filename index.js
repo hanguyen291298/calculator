@@ -5,7 +5,7 @@ function add(a, b){
 };
 
 function subtract(a, b){
-    return a -b;
+    return a - b;
 };
 
 function multiply(a, b){
@@ -24,9 +24,9 @@ const OPERATORS = {
     "x": multiply,
     "÷": devision,
 
-}
+};
 
-const  NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const  NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // Create elements of a calculator to use them when we need to update the original version
 
@@ -39,28 +39,28 @@ const CACULATOR = {
     "equalmark": "",
     "temp_input": "", // need a TEMP input to keep combining the value when it's clicked or keydown
 
-}
+};
 
 // Get all of elements to interact with a calculator
 
 let first_value = document.querySelector(".first_value");
 let second_value = document.querySelector(".second_value");
 let operator_mark = document.querySelector(".operator");
-let input_value = document.querySelector(".input_value")
-let equal_mark = document.querySelector(".equal_mark")
+let input_value = document.querySelector(".input_value");
+let equal_mark = document.querySelector(".equal_mark");
 
 // Create functions to be used for AC button, CE button 
 
 function Update(){
 
     first_value.innerHTML = CACULATOR.a_value;
-    second_value.innerHTML = CACULATOR.b_value
-    operator_mark.innerHTML = CACULATOR.operator
-    input_value.innerHTML = CACULATOR.inputvalue
-    equal_mark.innerHTML = CACULATOR.equalmark
-    temp_number = "";
+    second_value.innerHTML = CACULATOR.b_value;
+    operator_mark.innerHTML = CACULATOR.operator;
+    input_value.innerHTML = CACULATOR.inputvalue;
+    equal_mark.innerHTML = CACULATOR.equalmark;
+    temp_number = CACULATOR.temp_input;
 
-}
+};
 
 function DeleteInpput(){
 
@@ -69,25 +69,29 @@ function DeleteInpput(){
     }
     else{
         input_value.innerHTML = CACULATOR.inputvalue
+        temp_number = CACULATOR.temp_input
     }
     
-}
+};
 
 // Create an event to listen when AC and CE button are clicked
 
-const delete_all = document.querySelector(".AC")
-const delete_entry = document.querySelector(".CE")
+const delete_all = document.querySelector(".AC");
+const delete_entry = document.querySelector(".CE");
 
-delete_all.addEventListener("click", Update)
-delete_entry.addEventListener("click", DeleteInpput)
+delete_all.addEventListener("click", Update);
+delete_entry.addEventListener("click", DeleteInpput);
 
 // Create equal and backspace funtion and to be used in calculator_handle function if they are clicked or keydown 
 
 function equal(a, b, operator){
     let result = OPERATORS[operator](a, b)
+    console.log(a)
+    console.log(b)
+    console.log(operator)
     return result  
 
-}
+};
 
 function backspace(input, input_length){ 
     
@@ -99,20 +103,23 @@ function backspace(input, input_length){
         temp_number = CACULATOR.temp_input;
     }
     
-}
+};
  
 // Set the default 
 
-let temp_number = CACULATOR.temp_input
-let operator = CACULATOR.operator
+let temp_number = CACULATOR.temp_input;
+let operator = CACULATOR.operator;
 
 // We need to make a funtion to handle if those value are clicked or keydown and use them for calculate
 
 function Calculotor_handle(value){
 
-    if (NUMBERS.includes(parseFloat(value))){
+    if (NUMBERS.includes(parseFloat(value)) && temp_number.length <= 13){
         temp_number += value
         input_value.innerHTML = temp_number
+
+        console.log(temp_number)
+        console.log(input_value.textContent)
     }
 
     else if(value in OPERATORS){
@@ -153,11 +160,15 @@ function Calculotor_handle(value){
             input_value.innerHTML = "Can't not divide by zero"
         }
 
-        if (!equal_mark.textContent){
+        else if (!equal_mark.textContent && operator_mark.textContent){
             
             second_value.innerHTML += input_value.textContent;
             equal_mark.innerHTML = "="
             input_value.innerHTML = equal(first_value.textContent, second_value.textContent, operator_mark.textContent)
+        }
+        else if ( !operator_mark.textContent){
+            first_value.innerHTML = input_value.textContent
+            equal_mark.innerHTML = "="
         }
         else{
            
@@ -182,26 +193,26 @@ function Calculotor_handle(value){
     }
 
   
-}
+};
 
 // Add an event listener to capture buttons are clicked
 
 function handle_click(){
-    document.addEventListener("click", (event)=>{
-        const bnts = document.querySelector(".buttons")
-        if (!bnts.contains(event.target)){
-            Update()
-        }
-        else{
+    const bnts = document.querySelectorAll("button")
+    for (let bnt of bnts){
+        bnt.addEventListener("click", (event)=>{
             let text = event.target.textContent;
-            
-            Calculotor_handle(text) 
-        }
-        
-    })
-}
-
+                
+                Calculotor_handle(text) 
+        })
+    }        
+}       
+    
+    
+    
+    
  handle_click()
+
 
 // Add an event listener to capture keydown events
 
@@ -224,6 +235,6 @@ function handle_keydown(){
         Calculotor_handle(text)
     
     });
-}
+};
 
 handle_keydown()
