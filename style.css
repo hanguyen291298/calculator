@@ -48,11 +48,14 @@ body {
 
 
 .expression, .input_value{
-    margin-right: 20px;
+    margin-right: 10px;
     font-size: 26px;
     display: flex;
-    gap: 10px;
+    gap: 5px;
     
+}
+.expression div{
+    font-size: clamp(16px, 50%, 26px)
 }
 
 /*-----------------------------------Buttons--------------------------*/
