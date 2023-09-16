@@ -118,23 +118,32 @@ function Calculotor_handle(value){
     else if(value in OPERATORS){
 
         if (first_value.textContent && input_value.textContent === temp_number){
-             
-            first_value.innerHTML= equal(first_value.textContent, input_value.textContent, operator_mark.textContent)
-            equal_mark.innerHTML = CACULATOR.equalmark
+           
+            let temp_result = equal(first_value.textContent, input_value.textContent, operator_mark.textContent)
+            first_value.innerHTML = temp_result
+            input_value.innerHTML = temp_result
+           
             operator_mark.innerHTML = value
             temp_number = CACULATOR.temp_input
         }
         else{
+            
 
             if (equal_mark.textContent){
                 second_value.innerHTML = CACULATOR.b_value
                 equal_mark.innerHTML = "";
             }
+        
             operator = value
             first_value.innerHTML = input_value.textContent
             operator_mark.innerHTML = operator
             temp_number = CACULATOR.temp_input;
+            
         }
+
+        
+
+    
     }
 
     else if (value === "=" || value === "Enter"){
